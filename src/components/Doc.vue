@@ -34,7 +34,9 @@ export default {
     axios.get('https://run.mocky.io/v3/730ca08c-8cd9-4145-82fb-b925b17ccf09')
       .then(response => {
         console.log(response.data)
+        // 返回的内容忘了加上问题，在这里手动补上
         const html = '<div>' + marked(response.data.md) + '<question id=100/></div>'
+        // 这里是把文稿规范里的标签替换为vue的组件
         const htmlContainer = html.replace('<question id=100/>', '<SingleChoiceQuestionVue qid="100" />')
         this.docHtml = htmlContainer
       })
