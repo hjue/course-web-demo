@@ -36,10 +36,11 @@ export default {
   mounted () {
     const url = '/course'
     // const url = 'https://run.mocky.io/v3/730ca08c-8cd9-4145-82fb-b925b17ccf09'
+    // 从mock.js 中获取数据
     axios.get(url)
       .then(response => {
         console.log(response.data.md)
-        // 返回的内容忘了加上问题，在这里手动补上
+        // markdown文档转为html
         const html = '<div>' + marked(response.data.md, { sanitize: false }) + '</div>'
 
         // 这里是把文稿规范里的标签替换为vue的组件
