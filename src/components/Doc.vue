@@ -12,14 +12,17 @@
 // import vue from '@/api'
 import axios from 'axios'
 import SingleChoiceQuestionVue from './SingleChoiceQuestion.vue'
+import MultipleChoiceQuestion from './MultipleChoiceQuestion.vue'
 import Vue from 'vue'
+require('@/libs/mock.js')
 
 Vue.component('SingleChoiceQuestionVue', SingleChoiceQuestionVue)
+Vue.component('MultipleChoiceQuestion', MultipleChoiceQuestion)
 
 const marked = require('marked')
 
 export default {
-  components: { SingleChoiceQuestionVue },
+  components: { SingleChoiceQuestionVue, MultipleChoiceQuestion },
   name: 'Doc',
   props: {
     msg: String
@@ -31,13 +34,17 @@ export default {
   },
   created () {},
   mounted () {
-    axios.get('https://run.mocky.io/v3/730ca08c-8cd9-4145-82fb-b925b17ccf09')
+    const url = '/course'
+    // const url = 'https://run.mocky.io/v3/730ca08c-8cd9-4145-82fb-b925b17ccf09'
+    axios.get(url)
       .then(response => {
-        console.log(response.data)
+        console.log(response.data.md)
         // 返回的内容忘了加上问题，在这里手动补上
-        const html = '<div>' + marked(response.data.md) + '<question id=100/></div>'
+        const html = '<div>' + marked(response.data.md, { sanitize: false }) + '</div>'
+
         // 这里是把文稿规范里的标签替换为vue的组件
-        const htmlContainer = html.replace('<question id=100/>', '<SingleChoiceQuestionVue qid="100" />')
+        const htmlContainer = html.replace(/<question id="100" \/>/g, '<SingleChoiceQuestionVue qid="100" />').replace(/<question id="101" \/>/g, '<MultipleChoiceQuestion qid="101" />')
+        console.log(htmlContainer)
         this.docHtml = htmlContainer
       })
   },
@@ -47,4 +54,7 @@ export default {
 </script>
 
 <style>
+.doc {
+    text-align: left;
+}
 </style>
