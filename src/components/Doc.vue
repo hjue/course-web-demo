@@ -2,7 +2,7 @@
   <div class="doc">
       <h4>课程内容</h4>
       <div>
-        <component :is="{template:docHtml}"></component>
+        <component :is="{template:docHtml}" :index="this.$store.state.currentSection"></component>
       </div>
 
   </div>
@@ -24,32 +24,38 @@ const marked = require('marked')
 export default {
   components: { SingleChoiceQuestionVue, MultipleChoiceQuestion },
   name: 'Doc',
-  props: {
-    msg: String
-  },
+  props: ['index'],
   data () {
     return {
-      docHtml: '<div>Posts component</div>'
+      docHtml: '<div>Posts component</div>',
+      currentSection: this.$store.state.currentSection
     }
   },
-  created () {},
+  watch: {
+    index: function (newVal, oldVal) {
+      this.loadDoc()
+    }
+  },
   mounted () {
-    const url = '/course'
-    // const url = 'https://run.mocky.io/v3/730ca08c-8cd9-4145-82fb-b925b17ccf09'
-    // 从mock.js 中获取数据
-    axios.get(url)
-      .then(response => {
-        console.log(response.data.md)
-        // markdown文档转为html
-        const html = '<div>' + marked(response.data.md, { sanitize: false }) + '</div>'
-
-        // 这里是把文稿规范里的标签替换为vue的组件
-        const htmlContainer = html.replace(/<question id="100" \/>/g, '<SingleChoiceQuestionVue qid="100" />').replace(/<question id="101" \/>/g, '<MultipleChoiceQuestion qid="101" />')
-        console.log(htmlContainer)
-        this.docHtml = htmlContainer
-      })
+    this.loadDoc()
   },
   methods: {
+    loadDoc () {
+      const url = '/course/' + this.index
+      // const url = 'https://run.mocky.io/v3/730ca08c-8cd9-4145-82fb-b925b17ccf09'
+      // 从mock.js 中获取数据
+      axios.get(url)
+        .then(response => {
+          console.log(response.data)
+          // markdown文档转为html
+          const html = '<div>' + marked(response.data.md, { sanitize: false }) + '</div>'
+
+          // 这里是把文稿规范里的标签替换为vue的组件
+          const htmlContainer = html.replace(/<question id="107"><\/question>/g, '<SingleChoiceQuestionVue qid="107" />').replace(/<question id="108"><\/question>/g, '<MultipleChoiceQuestion qid="108" />')
+          // console.log(htmlContainer)
+          this.docHtml = htmlContainer
+        })
+    }
   }
 }
 </script>
