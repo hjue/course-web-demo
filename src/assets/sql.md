@@ -673,6 +673,9 @@ group by register_time order by register_time desc ;
   `create_time` int(11) DEFAULT NULL COMMENT '创建时间',
 ```
 <br>
+
+
+
 | id | user\_id | item\_id | behavior\_type | item\_category | create\_time |
 | --- | ------- | ------- | ------------- | ------------- | ----------- |
 | 10 | 1 | 1531036 | pv | 2920476 | 1511733732 |
@@ -687,6 +690,8 @@ group by register_time order by register_time desc ;
 | 120 | 100 | 1046201 | buy | 3002561 | 1511767298 |
 <br>
 - - -
+
+
 
 执行sql：
 

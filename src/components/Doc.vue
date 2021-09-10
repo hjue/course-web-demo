@@ -1,16 +1,19 @@
 <template>
-  <div class="doc">
-      <h4>课程内容</h4>
-      <div>
-        <component :is="{template:docHtml}" :index="this.$store.state.currentSection"></component>
-      </div>
-
+  <div class="doc" id="write">
+    <div>
+      <component
+        :is="{ template: docHtml }"
+        :index="this.$store.state.currentSection"
+      ></component>
+    </div>
   </div>
 </template>
 
 <script>
 // import vue from '@/api'
 import axios from 'axios'
+import '@/assets/article/typora-lark.css'
+// import '@/assets/article/github.css'
 import SingleChoiceQuestionVue from './SingleChoiceQuestion.vue'
 import MultipleChoiceQuestion from './MultipleChoiceQuestion.vue'
 import CodeQuestion from './CodeQuestion.vue'
@@ -27,39 +30,48 @@ export default {
   components: { SingleChoiceQuestionVue, MultipleChoiceQuestion, CodeQuestion },
   name: 'Doc',
   props: ['index'],
-  data () {
+  data() {
     return {
       docHtml: '<div>Posts component</div>',
       currentSection: this.$store.state.currentSection
     }
   },
   watch: {
-    index: function (newVal, oldVal) {
+    index: function(newVal, oldVal) {
       this.loadDoc()
     }
   },
-  mounted () {
+  mounted() {
     this.loadDoc()
   },
   methods: {
-    loadDoc () {
+    loadDoc() {
       const url = '/course/' + this.index
       // const url = 'https://run.mocky.io/v3/730ca08c-8cd9-4145-82fb-b925b17ccf09'
       // 从mock.js 中获取数据
-      axios.get(url)
-        .then(response => {
-          console.log(response.data)
-          // markdown文档转为html
-          const html = '<div>' + marked(response.data.md, { sanitize: false }) + '</div>'
+      axios.get(url).then(response => {
+        console.log(response.data)
+        // markdown文档转为html
+        const html =
+          '<div>' + marked(response.data.md, { sanitize: false }) + '</div>'
 
-          // 这里是把文稿规范里的标签替换为vue组件
-          let htmlContainer = html.replace(/<question id="108"><\/question>/g, '<MultipleChoiceQuestion qid="108" />')
-          htmlContainer = htmlContainer.replace(/<question id="111"><\/question>/g, '<CodeQuestion qid="111" />')
-          htmlContainer = htmlContainer.replace(/<question id="(\d+)"><\/question>/g, '<SingleChoiceQuestionVue qid="$1" />')
-          // htmlContainer = htmlContainer.replace(/<question id="(\d+)"><\/question>/g, '<SingleChoiceQuestionVue qid="$1" />')
-          // console.log(htmlContainer)
-          this.docHtml = htmlContainer
-        })
+        // 这里是把文稿规范里的标签替换为vue组件
+        let htmlContainer = html.replace(
+          /<question id="108"><\/question>/g,
+          '<MultipleChoiceQuestion qid="108" />'
+        )
+        htmlContainer = htmlContainer.replace(
+          /<question id="111"><\/question>/g,
+          '<CodeQuestion qid="111" />'
+        )
+        htmlContainer = htmlContainer.replace(
+          /<question id="(\d+)"><\/question>/g,
+          '<SingleChoiceQuestionVue qid="$1" />'
+        )
+        // htmlContainer = htmlContainer.replace(/<question id="(\d+)"><\/question>/g, '<SingleChoiceQuestionVue qid="$1" />')
+        // console.log(htmlContainer)
+        this.docHtml = htmlContainer
+      })
     }
   }
 }
@@ -67,6 +79,17 @@ export default {
 
 <style>
 .doc {
-    text-align: left;
+  text-align: left;
+}
+#write code {
+  display: inline-block;
+  width: 98%;
+  border: 1px solid #e7eaed;
+  background-color: #f8f8f8;
+  border-radius: 3px;
+  padding: 10px 10px 10px 10px;
+  font-size: 0.9em;
+  word-wrap: break-word;
+  word-break: normal;
 }
 </style>
