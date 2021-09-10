@@ -2,18 +2,19 @@
     <div class="demo-split">
         <Split v-model="split1">
             <div slot="left" class="demo-split-pane">
-                课程目录
+                <Toc />
             </div>
             <div slot="right" class="demo-split-pane">
-                <Doc />
+                <Doc :index="this.$store.state.currentSection" />
             </div>
         </Split>
     </div>
 </template>
 <script>
 import Doc from '@/components/Doc'
+import Toc from '@/components/Toc'
 export default {
-  components: { Doc },
+  components: { Doc, Toc },
   data () {
     return {
       split1: 0.2

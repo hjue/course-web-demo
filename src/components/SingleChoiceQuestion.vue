@@ -56,4 +56,7 @@ li {
 a {
   color: #42b983;
 }
+.single-choice-question{
+   border: 1px solid red;
+}
 </style>
