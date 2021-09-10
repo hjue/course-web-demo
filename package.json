@@ -5,7 +5,8 @@
   "scripts": {
     "serve": "vue-cli-service serve",
     "build": "vue-cli-service build",
-    "lint": "vue-cli-service lint"
+    "lint": "vue-cli-service lint",
+    "dist": "vue-cli-service build;scp -r dist/* kafka.csdn:/storage/docker/nginx/www"
   },
   "dependencies": {
     "axios": "^0.21.4",

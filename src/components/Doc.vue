@@ -51,7 +51,7 @@ export default {
           const html = '<div>' + marked(response.data.md, { sanitize: false }) + '</div>'
 
           // 这里是把文稿规范里的标签替换为vue的组件
-          const htmlContainer = html.replace(/<question id="107"><\/question>/g, '<SingleChoiceQuestionVue qid="107" />').replace(/<question id="108"><\/question>/g, '<MultipleChoiceQuestion qid="108" />')
+          const htmlContainer = html.replace(/<question id="108"><\/question>/g, '<MultipleChoiceQuestion qid="108" />').replace(/<question id="\d+"><\/question>/g, '<SingleChoiceQuestionVue qid="107" />')
           // console.log(htmlContainer)
           this.docHtml = htmlContainer
         })
