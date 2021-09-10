@@ -13,16 +13,18 @@
 import axios from 'axios'
 import SingleChoiceQuestionVue from './SingleChoiceQuestion.vue'
 import MultipleChoiceQuestion from './MultipleChoiceQuestion.vue'
+import CodeQuestion from './CodeQuestion.vue'
 import Vue from 'vue'
 require('@/libs/mock.js')
 
 Vue.component('SingleChoiceQuestionVue', SingleChoiceQuestionVue)
 Vue.component('MultipleChoiceQuestion', MultipleChoiceQuestion)
+Vue.component('CodeQuestion', CodeQuestion)
 
 const marked = require('marked')
 
 export default {
-  components: { SingleChoiceQuestionVue, MultipleChoiceQuestion },
+  components: { SingleChoiceQuestionVue, MultipleChoiceQuestion, CodeQuestion },
   name: 'Doc',
   props: ['index'],
   data () {
@@ -50,8 +52,11 @@ export default {
           // markdown文档转为html
           const html = '<div>' + marked(response.data.md, { sanitize: false }) + '</div>'
 
-          // 这里是把文稿规范里的标签替换为vue的组件
-          const htmlContainer = html.replace(/<question id="108"><\/question>/g, '<MultipleChoiceQuestion qid="108" />').replace(/<question id="\d+"><\/question>/g, '<SingleChoiceQuestionVue qid="107" />')
+          // 这里是把文稿规范里的标签替换为vue组件
+          let htmlContainer = html.replace(/<question id="108"><\/question>/g, '<MultipleChoiceQuestion qid="108" />')
+          htmlContainer = htmlContainer.replace(/<question id="111"><\/question>/g, '<CodeQuestion qid="111" />')
+          htmlContainer = htmlContainer.replace(/<question id="(\d+)"><\/question>/g, '<SingleChoiceQuestionVue qid="$1" />')
+          // htmlContainer = htmlContainer.replace(/<question id="(\d+)"><\/question>/g, '<SingleChoiceQuestionVue qid="$1" />')
           // console.log(htmlContainer)
           this.docHtml = htmlContainer
         })
