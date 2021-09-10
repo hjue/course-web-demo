@@ -1,8 +1,64 @@
+##  学习SQL能干什么？ 
 
-##  1. 学习SQL能干嘛？ 
 
-##  2. 数据库，表，SQL概念 
-##  3. sql 查询mysql数据库 
+
+### 学习SQL能干什么？
+
+- - -
+
+   学了我，你可以变得厉害吗 ？i am sure !!!
+
+   如果你会英语的话，可以很流利的跟外宾交流。
+
+   如果你会sql的话呢，你可以很流利的跟数据对话。
+
+   跟数据库对话的目的？让数据库告诉我们想要的一些信息。
+
+>    数据库：你不问我，我怎么告诉你？
+>      我：hello , how are  u ?
+>      数据库闭嘴了……
+
+
+> 学习sql的目的：自己查找数据，独立的完成简单的数据查询工作！
+
+
+&nbsp;&nbsp;&nbsp;&nbsp;作为一名非研发人员，工作中是否有这样的场景？你在整理一份报表，需要些数据，每次都给数据团队，或者研发团队提需求，即使一个特别简单的数据需求，你也需要走流程，排期。数据库就在那里，只要你学会了SQL就能从里面轻松的提取你想要的数据。
+
+&nbsp;&nbsp;&nbsp;&nbsp;有了数据，我们可以完成我们的工作，进而我们也可以进行数据分析。当前我们学习sql的第一个目的就是学会找到我们想要的数据。
+
+&nbsp;&nbsp;&nbsp;&nbsp; 数据，是一切分析的前提.只有拥有了数据，我们才可以进行数据分析。数据可以说话的，数据可以支撑你的想法，数据可以佐证你的建议。
+      
+
+### SQL是什么？
+
+- - -
+
+![](http://csdn-img-operation.oss-cn-beijing.aliyuncs.com/csdn/lab/幻灯片9.png)
+![](http://csdn-img-operation.oss-cn-beijing.aliyuncs.com/csdn/lab/幻灯片11.png)
+
+- - -
+
+```
+准备工作：下载work benach
+
+    mac os: https://dev.mysql.com/downloads/file/?id=497518
+    win os: https://dev.mysql.com/downloads/file/?id=497505
+
+特别注意windows 操作系统可能需要下载 vc++ 2019 才能完成安装
+    32位操作系统：http://aka.ms/vs/16/release/VC_redist.x86.exe
+    64位操作系统：https://aka.ms/vs/16/release/VC_redist.x64.exe
+```
+
+- - -
+
+![](http://csdn-img-operation.oss-cn-beijing.aliyuncs.com/csdn/lab/幻灯片12.png)
+
+- - -
+
+![](http://csdn-img-operation.oss-cn-beijing.aliyuncs.com/csdn/lab/幻灯片13.png)
+
+##  SQL 查询mysql数据库 
+
 ###   入门—简单查询
 - - -
 
@@ -382,7 +438,7 @@ SELECT DISTINCT name from student where name='李四';
 
 <question id="114"></question>
 
-##  4. 用户画像基本分析 
+##  用户画像基本分析 
 
 ###   查询指定用户的信息 
 
@@ -468,7 +524,7 @@ SELECT gender,COUNT(*) from sqlproject.app_user_info GROUP BY gender;
 
 <question id="116"></question>
 
-##  5. 用户增长数据分析 
+##  用户增长数据分析 
 
 ###   查询 2017-11-27日平台新增用户数 
 
@@ -594,7 +650,7 @@ group by register_time order by register_time desc ;
 
 <question id="66"></question>
 
-##  6. 用户活跃数据分析 
+##  用户活跃数据分析 
 
 ###   活跃用户分析uv,pv计算 
 
@@ -842,7 +898,7 @@ from_unixtime(create_time, '%Y-%m-%d') desc
 
 <question id="68"></question>
 
-##  7. 用户复购数据分析 
+##  用户复购数据分析 
 
 ###   查询平台复购的用户 
 
@@ -907,7 +963,7 @@ having count(behavior_type) >=2 limit 10
 
 <question id="119"></question>
 
-##  8. 用户转化数据分析 
+##  用户转化数据分析 
 
 ###   购物车转化率 
 
