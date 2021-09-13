@@ -1,3 +1,5 @@
+
+
 ##  学习SQL能干什么？ 
 
 
@@ -33,29 +35,67 @@
 
 - - -
 
-![](http://csdn-img-operation.oss-cn-beijing.aliyuncs.com/csdn/lab/幻灯片9.png)
-![](http://csdn-img-operation.oss-cn-beijing.aliyuncs.com/csdn/lab/幻灯片11.png)
 
-- - -
 
-```
+#### 什么是SQL
+
+
+
+结构化语言(Structured Query Language)简称SQL，是一种特殊目的的编程语言，是一种数据库查询和程序设计语言，用于存取数据以及查询、更新和管理关系数据库系统。与其他程序设计语言（如 C语言、Java 等）不同的是，SQL 由很少的关键字组成，每个 SQL 语句通过一个或多个关键字构成。
+
+通俗的说，就是你跟数据存储服务，数据库之间对话的语言，他们只认识这一种语言。
+
+#### 数据库是什么？dateabase
+
+是依照某种数据模型组织起来并存放二级存储器中的数据集合。这种数据集合具有如下特点：尽可能不重复，以最优方式为某个特定组织的多种应用服务。太虚了，数据库就是表的集合。
+
+
+
+#### 数据表是什么？table
+
+表是由行和列组成的一张二维表，这是关系数据库中最基本的数据模型
+
+
+
+#### 开课了，一起学
+
+我想进入mysql数据库，查看谁是最靓的仔，好的，老板！帮您安排！
+
 准备工作：下载work benach
+mac os:https://dev.mysql.com/downloads/file/?id=497518 
+win os:https://dev.mysql.com/downloads/file/?id=497505
 
-    mac os: https://dev.mysql.com/downloads/file/?id=497518
-    win os: https://dev.mysql.com/downloads/file/?id=497505
 
-特别注意windows 操作系统可能需要下载 vc++ 2019 才能完成安装
-    32位操作系统：http://aka.ms/vs/16/release/VC_redist.x86.exe
-    64位操作系统：https://aka.ms/vs/16/release/VC_redist.x64.exe
+
+> 特别注意windows 操作系统可能需要下载 vc++ 2019 才能完成安装
+> 32位操作系统： https://aka.ms/vs/16/release/VC_redist.x86.exe
+> 64位操作系统： https://aka.ms/vs/16/release/VC_redist.x64.exe
+
+
+
+#### workbench连接mysql
+
+
+
+MySQL Workbench 是可视化数据库设计软件，为数据库管理员和开发人员提供了一整套可视化的数据库操作环境，主要功能有数据库设计与模型建立、SQL 开发（取代 MySQL Query Browser）、数据库管理（取代 MySQL Administrator）。
+
+```
+免费连接地址：116.85.33.207:3306
+用户名：testuser
+密码：testuser
 ```
 
+![image-20210913172745354](https://img-blog.csdnimg.cn/81eafed752d64e2bbc798c3992516f50.png?x-oss-process=image/watermark,type_ZHJvaWRzYW5zZmFsbGJhY2s,shadow_50,text_Q1NETiBA5aSa6bG855qE5aSP5aSp,size_20,color_FFFFFF,t_70,g_se,x_16)
+
+
+
+#### CSDN 实验平台介绍
+
 - - -
 
-![](http://csdn-img-operation.oss-cn-beijing.aliyuncs.com/csdn/lab/幻灯片12.png)
+![](https://img-blog.csdnimg.cn/2547ca639d0942c0a14bbe47ad0ea23b.png?x-oss-process=image/watermark,type_ZHJvaWRzYW5zZmFsbGJhY2s,shadow_50,text_Q1NETiBA5aSa6bG855qE5aSP5aSp,size_20,color_FFFFFF,t_70,g_se,x_16)
 
-- - -
 
-![](http://csdn-img-operation.oss-cn-beijing.aliyuncs.com/csdn/lab/幻灯片13.png)
 
 ##  SQL 查询mysql数据库 
 
@@ -673,9 +713,6 @@ group by register_time order by register_time desc ;
   `create_time` int(11) DEFAULT NULL COMMENT '创建时间',
 ```
 <br>
-
-
-
 | id | user\_id | item\_id | behavior\_type | item\_category | create\_time |
 | --- | ------- | ------- | ------------- | ------------- | ----------- |
 | 10 | 1 | 1531036 | pv | 2920476 | 1511733732 |
@@ -690,8 +727,6 @@ group by register_time order by register_time desc ;
 | 120 | 100 | 1046201 | buy | 3002561 | 1511767298 |
 <br>
 - - -
-
-
 
 执行sql：
 
