@@ -89,13 +89,6 @@ MySQL Workbench 是可视化数据库设计软件，为数据库管理员和开�
 
 
 
-#### CSDN 实验平台介绍
-
-- - -
-
-![](https://img-blog.csdnimg.cn/2547ca639d0942c0a14bbe47ad0ea23b.png?x-oss-process=image/watermark,type_ZHJvaWRzYW5zZmFsbGJhY2s,shadow_50,text_Q1NETiBA5aSa6bG855qE5aSP5aSp,size_20,color_FFFFFF,t_70,g_se,x_16)
-
-
 
 ##  SQL 查询mysql数据库 
 
