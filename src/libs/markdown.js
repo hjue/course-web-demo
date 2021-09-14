@@ -98,6 +98,7 @@ marked.setOptions({
 })
 
 function getDocToc (mdContent) {
+  tocObj.toc = []
   marked(mdContent)
   return tocObj.menu()
 }
