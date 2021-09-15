@@ -1,4 +1,7 @@
 var marked = require('marked')
+
+// const BREAK_LINE_REGEXP = /\r\n|\r|\n/g
+
 const renderer = {
   heading (text, level) {
     var anchor = tocObj.add(text, level)
@@ -110,4 +113,37 @@ function getSections (mdContent, index) {
   return sections[index]
 }
 
-module.exports = { getSections, getDocToc }
+function markdownToHtml(mdContent) {
+  // markdown文档转为html
+  const html = '<div>' + marked(mdContent) + '</div>'
+
+  // 这里是把文稿规范里的标签替换为vue组件
+  let htmlContainer = html.replace(
+    /<question id="108"><\/question>/g,
+    '<MultipleChoiceQuestion qid="108" />'
+  )
+  htmlContainer = htmlContainer.replace(
+    /<question id="111"><\/question>/g,
+    '<CodeQuestion qid="111" />'
+  )
+  htmlContainer = htmlContainer.replace(
+    /<question id="(\d+)"><\/question>/g,
+    '<SingleChoiceQuestionVue qid="$1" />'
+  )
+  // htmlContainer = htmlContainer.replace(/<question id="(\d+)"><\/question>/g, '<SingleChoiceQuestionVue qid="$1" />')
+  // console.log(htmlContainer)
+  // 处理代码高亮
+  htmlContainer = htmlContainer.replace(/<pre>/g, "<pre class='hljs'>")
+  // 高亮增加行号
+  htmlContainer = htmlContainer.replace(/<code\s+((.|[\r\n])*)<\/code>/mg, (item, index) => {
+    // item 替换元素，index 替换元素的下标
+    const BREAK_LINE_REGEXP = /\r\n|\r|\n/g
+    const matchedItem = item.match(/(<code\s+[^>]*>)((.|[\r\n])*)<\/code>/m)
+    let ret = `${matchedItem[1]}<ul><li>
+        ${matchedItem[2].replace(BREAK_LINE_REGEXP, '\n</li><li>')}</li></ul></code>`
+    ret = ret.replace('<li></li></ul>', '</ul>')
+    return ret
+  })
+  return htmlContainer
+}
+module.exports = { getSections, getDocToc, markdownToHtml }

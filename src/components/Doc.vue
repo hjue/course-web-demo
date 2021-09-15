@@ -15,6 +15,7 @@ import axios from 'axios'
 // 课程内容样式，来自typora
 import '@/assets/article/typora-lark.css'
 // import '@/assets/article/github.css'
+import { markdownToHtml } from '@/libs/markdown'
 // 代码高亮样式
 import hljs from 'highlight.js'
 import 'highlight.js/styles/atom-one-dark.css'
@@ -68,27 +69,8 @@ export default {
       // 从mock.js 中获取数据
       axios.get(url).then(response => {
         console.log(response.data)
-        // markdown文档转为html
-        const html = '<div>' + marked(response.data.md) + '</div>'
-
-        // 这里是把文稿规范里的标签替换为vue组件
-        let htmlContainer = html.replace(
-          /<question id="108"><\/question>/g,
-          '<MultipleChoiceQuestion qid="108" />'
-        )
-        htmlContainer = htmlContainer.replace(
-          /<question id="111"><\/question>/g,
-          '<CodeQuestion qid="111" />'
-        )
-        htmlContainer = htmlContainer.replace(
-          /<question id="(\d+)"><\/question>/g,
-          '<SingleChoiceQuestionVue qid="$1" />'
-        )
-        // htmlContainer = htmlContainer.replace(/<question id="(\d+)"><\/question>/g, '<SingleChoiceQuestionVue qid="$1" />')
-        // console.log(htmlContainer)
-        // 处理代码高亮
-        htmlContainer = htmlContainer.replace(/<pre>/g, "<pre class='hljs'>")
-        this.docHtml = htmlContainer
+        // 处理markdown文档
+        this.docHtml = markdownToHtml(response.data.md)
       })
     }
   }
@@ -99,12 +81,38 @@ export default {
 .doc {
   text-align: left;
 }
-#write code {
-  display: inline-block;
-  width: 98%;
-  padding: 10px 10px 10px 10px;
-  font-size: 0.9em;
-  word-wrap: break-word;
-  word-break: normal;
+
+#write pre {
+  tab-size: 2;
+  white-space: pre-wrap;
 }
+#write code {
+  display: block;
+  font-size: 0.9em;
+  overflow-x: auto;
+  padding: 10px 5px;
+  word-wrap: break-word;
+  word-break: break-all;
+  font-family: 'Source Code Pro', 'DejaVu Sans Mono', 'Ubuntu Mono',
+    'Anonymous Pro', 'Droid Sans Mono', Menlo, Monaco, Consolas, Inconsolata,
+    Courier, monospace, 'PingFang SC', 'Microsoft YaHei', sans-serif;
+}
+.hljs ul {
+  list-style: decimal;
+  margin: 0 0 0 40px !important;
+  padding: 0px 5px 0 0 !important;
+}
+.hljs li {
+  list-style: decimal-leading-zero;
+  border-left: 1px solid #111 !important;
+  padding: 2px 5px !important;
+  margin: 0 !important;
+  line-height: 14px;
+  width: 100%;
+  box-sizing: border-box;
+}
+/* .hljs li:nth-of-type(even) {
+  background-color: rgba(255, 255, 255, 0.015);
+  color: inherit;
+} */
 </style>
