@@ -5,7 +5,7 @@
         <router-link to="/course/sql">SQL实战数据分析</router-link>
       </p>
       <p>
-        <router-link to="/course/sql">Python编程基础</router-link>
+        <router-link to="/course/python">Python编程基础</router-link>
       </p>
     </div>
     <img alt="Vue logo" src="../assets/logo.png" />

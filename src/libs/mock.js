@@ -1,18 +1,19 @@
 import Mock from 'mockjs'
-import mdContent from '@/assets/sql.md'
+import mdContentSql from '@/assets/sql.md'
+import mdContentPython from '@/assets/python.md'
 import { getDocToc, getSections } from '@/libs/markdown'
 
-Mock.mock(/\/course\/\d+/, 'get', function (options) {
-  const cid = options.url.replace('/course/', '')
-  return { md: getSections(mdContent, cid) }
+const courseMap = {
+  python: mdContentPython,
+  sql: mdContentSql
+}
+Mock.mock(/\/course\/\w+\/\d+/, 'get', function (options) {
+  const [name, cid] = options.url.replace('/course/', '').split('/')
+  return { md: getSections(courseMap[name], cid) }
 })
 
-Mock.mock('/course', {
-  name: '@name',
-
-  md: mdContent
-})
-
-Mock.mock('/toc', {
-  toc: JSON.stringify(getDocToc(mdContent))
+Mock.mock(/\/toc\/\w+/, function(options) {
+  const name = options.url.replace('/toc/', '')
+  console.log('toc:' + name)
+  return { toc: JSON.stringify(getDocToc(courseMap[name])) }
 })

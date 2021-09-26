@@ -64,7 +64,7 @@ export default {
   },
   methods: {
     loadDoc() {
-      const url = '/course/' + this.index
+      const url = '/course/' + this.$route.params.name + '/' + this.index
       // const url = 'https://run.mocky.io/v3/730ca08c-8cd9-4145-82fb-b925b17ccf09'
       // 从mock.js 中获取数据
       axios.get(url).then(response => {

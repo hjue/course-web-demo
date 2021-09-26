@@ -1,14 +1,6 @@
 var marked = require('marked')
 
 // const BREAK_LINE_REGEXP = /\r\n|\r|\n/g
-
-const renderer = {
-  heading (text, level) {
-    var anchor = tocObj.add(text, level)
-    return `<a id=${anchor} class="anchor-fix"></a><h${level}>${text}</h${level}>\n`
-  }
-}
-
 const tocObj = {
   mdContent: '',
   add: function (text, level) {
@@ -77,31 +69,43 @@ const tocObj = {
   index: 0
 }
 
-marked.use({ renderer })
+const renderer = {
+  heading (text, level) {
+    var anchor = tocObj.add(text, level)
+    return `<a id=${anchor} class="anchor-fix"></a><h${level}>${text}</h${level}>\n`
+  }
+}
 
-marked.setOptions({
-  baseUrl: null,
-  breaks: false,
-  extensions: null,
-  gfm: true,
-  headerIds: true,
-  headerPrefix: '',
-  highlight: null,
-  langPrefix: 'language-',
-  mangle: true,
-  pedantic: false,
-  sanitize: false,
-  sanitizer: null,
-  silent: false,
-  smartLists: false,
-  smartypants: false,
-  tokenizer: null,
-  walkTokens: null,
-  xhtml: false
-})
+function setMarkedOptions() {
+  marked.use({ renderer })
+
+  marked.setOptions({
+    baseUrl: null,
+    breaks: false,
+    extensions: null,
+    gfm: true,
+    headerIds: true,
+    headerPrefix: '',
+    highlight: null,
+    langPrefix: 'language-',
+    mangle: true,
+    pedantic: false,
+    sanitize: false,
+    sanitizer: null,
+    silent: false,
+    smartLists: false,
+    smartypants: false,
+    tokenizer: null,
+    walkTokens: null,
+    xhtml: false
+  })
+}
 
 function getDocToc (mdContent) {
   tocObj.toc = []
+  setMarkedOptions()
+  tocObj.mdContent = mdContent
+  console.log(tocObj)
   marked(mdContent)
   return tocObj.menu()
 }
@@ -135,15 +139,15 @@ function markdownToHtml(mdContent) {
   // 处理代码高亮
   htmlContainer = htmlContainer.replace(/<pre>/g, "<pre class='hljs'>")
   // 高亮增加行号
-  htmlContainer = htmlContainer.replace(/<code\s+((.|[\r\n])*)<\/code>/mg, (item, index) => {
-    // item 替换元素，index 替换元素的下标
-    const BREAK_LINE_REGEXP = /\r\n|\r|\n/g
-    const matchedItem = item.match(/(<code\s+[^>]*>)((.|[\r\n])*)<\/code>/m)
-    let ret = `${matchedItem[1]}<ul><li>
-        ${matchedItem[2].replace(BREAK_LINE_REGEXP, '\n</li><li>')}</li></ul></code>`
-    ret = ret.replace('<li></li></ul>', '</ul>')
-    return ret
-  })
+  // htmlContainer = htmlContainer.replace(/<code\s+((.|[\r\n])*)<\/code>/mg, (item, index) => {
+  //   // item 替换元素，index 替换元素的下标
+  //   const BREAK_LINE_REGEXP = /\r\n|\r|\n/g
+  //   const matchedItem = item.match(/(<code\s+[^>]*>)((.|[\r\n])*)<\/code>/m)
+  //   let ret = `${matchedItem[1]}<ul><li>
+  //       ${matchedItem[2].replace(BREAK_LINE_REGEXP, '\n</li><li>')}</li></ul></code>`
+  //   ret = ret.replace('<li></li></ul>', '</ul>')
+  //   return ret
+  // })
   return htmlContainer
 }
 module.exports = { getSections, getDocToc, markdownToHtml }
