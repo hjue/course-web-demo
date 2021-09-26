@@ -1,5 +1,5 @@
 <template>
-  <div class="doc" id="write">
+  <div class="article">
     <div>
       <component
         :is="{ template: docHtml }"
@@ -78,15 +78,16 @@ export default {
 </script>
 
 <style>
-.doc {
+.article {
+  vertical-align: top;
   text-align: left;
 }
 
-#write pre {
+.article pre {
   tab-size: 2;
   white-space: pre-wrap;
 }
-#write code {
+.article code {
   display: block;
   font-size: 0.9em;
   overflow-x: auto;
