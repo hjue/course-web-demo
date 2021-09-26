@@ -6,8 +6,6 @@
 
 ### 学习SQL能干什么？
 
-- - -
-
    学了我，你可以变得厉害吗 ？i am sure !!!
 
    如果你会英语的话，可以很流利的跟外宾交流。
@@ -45,50 +43,25 @@
 
 通俗的说，就是你跟数据存储服务，数据库之间对话的语言，他们只认识这一种语言。
 
-#### 数据库是什么？dateabase
+#### 数据库是什么？
 
-是依照某种数据模型组织起来并存放二级存储器中的数据集合。这种数据集合具有如下特点：尽可能不重复，以最优方式为某个特定组织的多种应用服务。太虚了，数据库就是表的集合。
-
-
-
-#### 数据表是什么？table
-
-表是由行和列组成的一张二维表，这是关系数据库中最基本的数据模型
+数据库（database）就是存储数据的仓库，其本质是一个文件系统，数据按照特定的格式将数据存储起来，用户可以对数据库中的数据进行增加，修改，删除及查询操作。
 
 
+#### 数据表是什么？
 
-#### 开课了，一起学
-
-我想进入mysql数据库，查看谁是最靓的仔，好的，老板！帮您安排！
-
-准备工作：下载work benach
-mac os : https://dev.mysql.com/downloads/file/?id=497518 
-win os : https://dev.mysql.com/downloads/file/?id=497505
+数据库中以表（table）为组织单位存储数据。这是关系数据库中最基本的数据模型。
 
 
+表是由行和列组成的一张二维表，表类似我们的Java类，每个字段都有对应的数据类型。
 
-> 特别注意 windows 
-> 操作系统可能需要下载 vc++ 2019 才能完成安装
-> 32位操作系统： https://aka.ms/vs/16/release/VC_redist.x86.exe
-> 64位操作系统： https://aka.ms/vs/16/release/VC_redist.x64.exe
+用我们熟悉的java程序来与关系型数据对比，就会发现以下对应关系。
 
+类----------表
 
+类中属性----------表中字段
 
-#### workbench连接mysql
-
-
-
-MySQL Workbench 是可视化数据库设计软件，为数据库管理员和开发人员提供了一整套可视化的数据库操作环境，主要功能有数据库设计与模型建立、SQL 开发（取代 MySQL Query Browser）、数据库管理（取代 MySQL Administrator）。
-
-```
-免费连接地址：116.85.33.207:3306
-用户名：testuser
-密码：testuser
-```
-
-
-![image-20210913172745354](https://img-blog.csdnimg.cn/81eafed752d64e2bbc798c3992516f50.png?x-oss-process=image/watermark,type_ZHJvaWRzYW5zZmFsbGJhY2s,shadow_50,text_Q1NETiBA5aSa6bG855qE5aSP5aSp,size_20,color_FFFFFF,t_70,g_se,x_16)
-
+对象----------记录
 
 
 ##  SQL 查询mysql数据库 
